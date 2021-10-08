@@ -1,13 +1,27 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-const IndexPage = () => (
+export default ({data}) => {
+  console.log(data);
+  return (
   <Layout>
     <Seo title="Home" />
+    <div>
+      <h1>Cariny's thoughts</h1>
+      <h4>{data.allMarkdownRemark.totalCount}</h4>
+      {
+        data.allMarkdownRemark.edges.map(({node}) => (
+          <div key = {node.id}>
+              <h2>{node.frontmatter.title} - {node.frontmatter.date}</h2>
+              <p>{node.excerpt}</p>
+          </div>
+        ))
+      }
+    </div>
     <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
@@ -24,6 +38,24 @@ const IndexPage = () => (
       <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
     </p>
   </Layout>
-)
+  )
+}
 
-export default IndexPage
+export const query = graphql`
+  query {
+  allMarkdownRemark {
+    totalCount
+    edges {
+      node {
+        id
+        fileAbsolutePath
+        frontmatter {
+          date
+          description
+          title
+        }
+        excerpt
+      }
+    }
+  }
+}`
