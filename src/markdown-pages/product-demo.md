@@ -1,10 +1,10 @@
 ---
     title: "Product demo" 
-    date: "2021-10-07"
+    date: "2021-10-06"
     description: "Product demo for loan guardian" 
 ---
 
-Thank you everyone who enjoyed this product demo about loan guardian 
+Thank you everyone who enjoyed this product demo about loan guardian.
 
 <iframe 
     frameborder="0" 
